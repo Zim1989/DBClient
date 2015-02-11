@@ -24,15 +24,15 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
     private String projekt;
     private ResultSet result;
     private Statement st;
-    protected final PropertyChangeSupport pcs;
+    
     /**
      * Creates new form MitarbeiterPanel
      */
     public MitarbeiterPanel(DetailContainer dc) {
         this.dc = dc;
         initComponents();
-        this.pcs = new PropertyChangeSupport(this);
         
+       
     }
     
      public void setName(String name, String projekt) {
@@ -114,9 +114,7 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        pcs.firePropertyChange(projekt+ ConstantStrings.SEPARATOR
-                        + ConstantStrings.SUMMARY, null, 1);
-        System.out.print(projekt);
+        dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
