@@ -285,7 +285,7 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         if(jLabel6.getText()=="") {
             return;
         }
-        dc.changeActive(jLabel6.getText()+"$$"+jLabel1.getText()+"##Mitarbeiter" );
+        dc.changeActive(jLabel6.getText()+"$$"+jLabel1.getText()+"##Objekt" );
 
      }//GEN-LAST:event_jLabel6MouseClicked
 
