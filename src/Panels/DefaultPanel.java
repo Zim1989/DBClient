@@ -194,15 +194,35 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jPanel5.add(jLabel7);
 
         jLabel8.setText("jLabel8");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel8);
 
         jLabel9.setText("jLabel9");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel9);
 
         jLabel10.setText("jLabel10");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel10);
 
         jLabel11.setText("jLabel11");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel11);
 
         jPanel3.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -212,9 +232,40 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
+        if(jLabel7.getText()=="") {
+            return;
+        }
         dc.changeActive(jLabel1.getText()+"$$"+jLabel7.getText()+"##Mitarbeiter" );
     }//GEN-LAST:event_jLabel7MouseClicked
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        if(jLabel8.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel1.getText()+"$$"+jLabel8.getText()+"##Mitarbeiter" );
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        if(jLabel9.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel1.getText()+"$$"+jLabel9.getText()+"##Mitarbeiter" );
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        if(jLabel10.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel1.getText()+"$$"+jLabel10.getText()+"##Mitarbeiter" );
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        if(jLabel11.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel1.getText()+"$$"+jLabel11.getText()+"##Mitarbeiter" );
+    }//GEN-LAST:event_jLabel11MouseClicked
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
