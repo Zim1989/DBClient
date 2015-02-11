@@ -36,7 +36,7 @@ public class DetailContainer {
         detailPanel.add(new MitarbeiterPanel(this)); //3
         detailPanel.add(new ObjektPanel(this)); //4
         detailPanel.add(new FachamtPanel(this)); //5
-        detailPanel.add(new AuftragnehmerPanel()); //6
+        detailPanel.add(new AuftragnehmerPanel(this)); //6
         
         
         active = detailPanel.get(0);
@@ -105,7 +105,7 @@ public class DetailContainer {
                     String fachamt = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
                     name = s.substring(0, s.indexOf("$$"));
                     active = detailPanel.get(5);
-                    ((FachamtPanel)active).setName(fachamt, name);
+                    ((FachamtPanel)active).setName(name, fachamt);
                     ((FachamtPanel)active).callDb();
                     changed();
                     break;
@@ -113,8 +113,8 @@ public class DetailContainer {
                     String auftragnehmer = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
                     name = s.substring(0, s.indexOf("$$"));
                     active = detailPanel.get(6);
-                    //((AuftragnehmerPanel)active).setName(auftragnehmer, name);
-                    //((AuftragnehmerPanel)active).callDb();
+                    ((AuftragnehmerPanel)active).setName(name, auftragnehmer);
+                    ((AuftragnehmerPanel)active).callDb();
                     changed();
                     break;
 /*                case "Beteiligte":                    
