@@ -74,6 +74,7 @@ public class DetailContainer {
             view = s.substring(s.indexOf("##")+2, s.length());
             switch(view){
                 case "Allgemein":
+                    System.out.println(">HHHHH");
                     active = detailPanel.get(0);
                     ((DefaultPanel)active).setString(name);
                     ((DefaultPanel)active).callDb();
@@ -91,6 +92,7 @@ public class DetailContainer {
                     break;
                 default:
                     active = detailPanel.get(0);
+                    changed();
             }
             active.repaint();
             //((DefaultPanel)active).changelabel(name);
