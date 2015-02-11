@@ -58,7 +58,6 @@ public class DetailContainer {
         
     }
     public JPanel getActivePanel() {
-
         return active;
     }
 

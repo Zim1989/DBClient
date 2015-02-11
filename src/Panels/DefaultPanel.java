@@ -186,6 +186,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jPanel5.setLayout(new java.awt.GridLayout(1, 5));
 
         jLabel7.setText("jLabel7");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel7);
 
         jLabel8.setText("jLabel8");
@@ -204,6 +209,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
 
         add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        dc.changeActive(jLabel1.getText()+"$$"+jLabel7.getText()+"##Mitarbeiter" );
+    }//GEN-LAST:event_jLabel7MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
