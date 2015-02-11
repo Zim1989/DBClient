@@ -31,11 +31,10 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
     public MitarbeiterPanel(DetailContainer dc) {
         this.dc = dc;
         initComponents();
-        
        
     }
     
-     public void setName(String name, String projekt) {
+    public void setName(String name, String projekt) {
         this.projekt = projekt;
         this.name = name;
     }
