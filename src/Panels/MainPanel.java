@@ -19,15 +19,20 @@ public class MainPanel extends javax.swing.JPanel implements PropertyChangeListe
      */
     public MainPanel() {
         initComponents();
-        details = new DetailContainer(this.con);
-        add(details.getActivePanel());
-        details.addListener(this.naviPanel2.getTree());
-        this.naviPanel2.getTree().addListener(this);
+        
     }
     
     public void initTree(Start.OracleConnector con){
         this.con = con;
         naviPanel2.initTree(con);
+    }
+    
+    public void initDetails(Start.OracleConnector con){
+        this.con = con;
+        details = new DetailContainer(this.con);
+        add(details.getActivePanel());
+        details.addListener(this.naviPanel2.getTree());
+        this.naviPanel2.getTree().addListener(this);
     }
     
     /**

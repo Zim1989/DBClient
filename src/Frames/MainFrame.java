@@ -19,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(Start.OracleConnector con) {
         initComponents();
         mainPanel1.initTree(con);
+        mainPanel1.initDetails(con);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(this);

@@ -41,7 +41,7 @@ public class OracleConnector {
             // respectively. They should be whatever is necessary to connect
             // to the database.
             //psql -h db.f4.htw-berlin.de _s0531362__db2_projekt s0531362
-            dbcon = DriverManager.getConnection(info, "christmann",
+            dbcon = DriverManager.getConnection(info, "heilmann",
 					"student");
             
         } catch (SQLException se) {

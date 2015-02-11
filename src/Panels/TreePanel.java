@@ -53,18 +53,30 @@ public class TreePanel extends javax.swing.JPanel implements
 
     private void createNodes(DefaultMutableTreeNode top) {
         DefaultMutableTreeNode projekt;
+        DefaultMutableTreeNode view;
         try {
             st = con.dbcon.createStatement();
-            result = st.executeQuery("SELECT name FROM Objekt");
+            if(st==null){
+                return;
+            }
+            result = st.executeQuery("SELECT name FROM Baumassnahme");
             String name;
             while (result.next()) {
                 name = result.getString(1);
                 projekt = new DefaultMutableTreeNode(name);
                 top.add(projekt);
+                view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.SUMMARY);
+                projekt.add(view);
+                view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.PERSONS);
+                projekt.add(view);
+                view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.MONEY);
+                projekt.add(view);
             }
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(TreePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     private void deleteNote(String name) {
@@ -95,8 +107,8 @@ public class TreePanel extends javax.swing.JPanel implements
             return;
         }
         String name = (String) node.getUserObject();
+        //node.get
         if (!(node.isRoot())) {
-            System.out.println(name);
             pcs.firePropertyChange("change", null, 1);
         }
     }
@@ -106,7 +118,6 @@ public class TreePanel extends javax.swing.JPanel implements
     }
 
     
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch(evt.getPropertyName()){

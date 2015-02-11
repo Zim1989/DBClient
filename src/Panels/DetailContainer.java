@@ -13,6 +13,7 @@ public class DetailContainer {
     protected JPanel active;
     protected Start.OracleConnector oc;
     protected final PropertyChangeSupport pcs;
+   
 
     public DetailContainer(Start.OracleConnector oc) {
         this.pcs = new PropertyChangeSupport(this);

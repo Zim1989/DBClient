@@ -21,7 +21,7 @@ public class BauProjektVerwaltung {
      */
     public static void main(String[] args) throws SQLException {
         
-        OracleConnector c = new OracleConnector(ConnectionInfo.BEUTH_CONNECTION);
+        OracleConnector c = new OracleConnector(ConnectionInfo.PUTTY_CONNECTION);
         MainFrame frame = new MainFrame(c);
         //Controller controller = new Controller(frame, c);
         //c.dbcon.close();
