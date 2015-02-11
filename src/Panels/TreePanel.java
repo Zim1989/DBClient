@@ -101,12 +101,12 @@ public class TreePanel extends javax.swing.JPanel implements
             if (node.getParent() == node.getRoot()) {
                 pcs.firePropertyChange(name + ConstantStrings.SEPARATOR
                         + ConstantStrings.SUMMARY, null, 1);
-                System.out.println(name+ConstantStrings.SEPARATOR+ConstantStrings.SUMMARY);
+                
             } else {
                 String name2 = (String)(((DefaultMutableTreeNode) node.getParent()).getUserObject());
                 pcs.firePropertyChange(name2 + ConstantStrings.SEPARATOR
                         + name, null, 1);
-                System.out.println(name2+ConstantStrings.SEPARATOR+name);
+                
             }
 
         }

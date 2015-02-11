@@ -64,11 +64,8 @@ public class MainPanel extends javax.swing.JPanel implements PropertyChangeListe
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        switch(evt.getPropertyName()){
-           case "change":
-               System.out.println("empfangen");
-               details.changeActive("change");
-               break;
-       }
+        System.out.println("empfangen");
+        details.changeActive(evt.getPropertyName());
+       
     }
 }
