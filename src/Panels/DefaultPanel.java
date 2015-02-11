@@ -33,11 +33,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         oc = dc.getOracleConnector();
         
         initComponents();
-                        jLabel7.setText("");
-                jLabel8.setText("");
-                jLabel9.setText("");
-                jLabel10.setText("");
-                jLabel11.setText("");
+        jLabel7.setText("");
+        jLabel8.setText("");
+        jLabel9.setText("");
+        jLabel10.setText("");
+        jLabel11.setText("");
     }
     public void setString(String o) {
         objekt = o;
@@ -151,6 +151,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("jLabel6");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel6, java.awt.BorderLayout.CENTER);
 
         add(jPanel4);
@@ -265,6 +270,14 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         }
         dc.changeActive(jLabel1.getText()+"$$"+jLabel11.getText()+"##Mitarbeiter" );
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        if(jLabel6.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel6.getText()+"$$"+jLabel1.getText()+"##Mitarbeiter" );
+
+     }//GEN-LAST:event_jLabel6MouseClicked
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
