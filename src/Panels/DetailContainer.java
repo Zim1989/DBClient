@@ -80,6 +80,14 @@ public class DetailContainer {
                     ((DefaultPanel)active).callDb();
                     changed();
                     break;
+                case "Mitarbeiter":
+                    String mitarbeiter = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
+                    name = s.substring(0, s.indexOf("$$"));
+                    active = detailPanel.get(3);
+                    ((MitarbeiterPanel)active).setName(mitarbeiter, name);
+                    ((MitarbeiterPanel)active).callDb();
+                    changed();
+                    break;
                 case "Beteiligte":                    
                     active = detailPanel.get(3);
                     ((MitarbeiterPanel)active).setName("Simon Horn", name);
