@@ -43,7 +43,7 @@ public class TreePanel extends javax.swing.JPanel implements
     public void initTree(Start.OracleConnector con) {
         this.con = con;
         jScrollPane1 = new JScrollPane();
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Projekte");
+    DefaultMutableTreeNode top = new DefaultMutableTreeNode("Projekte");
         createNodes(top);
         naviTree = new JTree(top);
         naviTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);

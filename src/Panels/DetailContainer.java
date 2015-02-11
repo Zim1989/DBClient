@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JPanel;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 
 public class DetailContainer {
 
@@ -29,7 +31,48 @@ public class DetailContainer {
         detailPanel.add(new DefaultPanel(this));
         active = detailPanel.get(0);
     }
-
+    public String[] getData(String statment) {
+        Statement st;
+        ResultSet result;
+        try {
+            st = oc.dbcon.createStatement();
+            if(st==null){
+                return null;
+            }
+            result = st.executeQuery("SELECT name FROM Baumassnahme");
+            String name;
+            while (result.next()) {
+                name = result.getString(1);
+                System.out.println(name);
+            }
+            st.close();
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(TreePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public void dbTest() {
+        Statement st;
+        ResultSet result;
+        try {
+            st = oc.dbcon.createStatement();
+            if(st==null){
+                return;
+            }
+            result = st.executeQuery("SELECT name FROM Baumassnahme");
+            String name;
+            while (result.next()) {
+                name = result.getString(1);
+                System.out.println(name);
+            }
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TreePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     public JPanel getActivePanel() {
 
         return active;
@@ -37,8 +80,16 @@ public class DetailContainer {
 
     public void changeActive(String s) {
         
+        String name;
+        try {
+            name = s.substring(0, s.indexOf("##") );
+        } catch (java.lang.StringIndexOutOfBoundsException e) {
+            name = "nüscht";
+        }
+        System.out.println(name);
         active = detailPanel.get(0);
         ((DefaultPanel)active).changelabel();
+        //dbTest();
 		//new JDialog(null, "test");
         //JOptionPane.showMessageDialog(null, "Test", "Test Titel", JOptionPane.OK_CANCEL_OPTION);
     }
