@@ -1,6 +1,7 @@
 package Panels;
 
 
+import KonstantenKlassen.ConstantStrings;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.ResultSet;
@@ -29,6 +30,7 @@ public class DetailContainer {
         this.oc = oc;
         detailPanel = new ArrayList<JPanel>();
         detailPanel.add(new DefaultPanel(this));
+        detailPanel.add(new FinanzPanel());
         active = detailPanel.get(0);
     }
     public String[] getData(String statment) {
@@ -81,15 +83,34 @@ public class DetailContainer {
     public void changeActive(String s) {
         
         String name;
+        String view;
         try {
             name = s.substring(0, s.indexOf("##") );
-            active = detailPanel.get(0);
-            ((DefaultPanel)active).changelabel(name);
-
+            view = s.substring(s.indexOf("##")+2, s.length());
+            switch(view){
+                case "Allgemein":
+                    active = detailPanel.get(0);
+                    changed();
+                    break;
+                case "Beteiligte":
+                    
+                    break;
+                case "Finanzen":
+                    active = detailPanel.get(1);
+                    changed();
+                    break;
+                default:
+                    active = detailPanel.get(0);
+            }
+            active.repaint();
+            //((DefaultPanel)active).changelabel(name);
+            
         } catch (java.lang.StringIndexOutOfBoundsException e) {
             name = "nüscht";
+            view = "keine";
         }
         System.out.println(name);
+        System.out.println(view);
             
         //dbTest();
 		//new JDialog(null, "test");
@@ -97,8 +118,6 @@ public class DetailContainer {
     }
     
     public void changed(){
-        
-        
         pcs.firePropertyChange("change", active, 1);
     }
     

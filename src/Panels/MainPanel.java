@@ -7,6 +7,7 @@ package Panels;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import javax.swing.JPanel;
 
 /**
  *
@@ -30,7 +31,8 @@ public class MainPanel extends javax.swing.JPanel implements PropertyChangeListe
     public void initDetails(Start.OracleConnector con){
         this.con = con;
         details = new DetailContainer(this.con);
-        add(details.getActivePanel());
+        detailPanel = details.getActivePanel();
+        add(detailPanel);
         details.addListener(this.naviPanel2.getTree());
         this.naviPanel2.getTree().addListener(this);
     }
@@ -59,13 +61,18 @@ public class MainPanel extends javax.swing.JPanel implements PropertyChangeListe
     // End of variables declaration//GEN-END:variables
     private Start.OracleConnector con;
     private DetailContainer details;
-
+    private JPanel detailPanel;
    
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("empfangen");
         details.changeActive(evt.getPropertyName());
+        this.remove(detailPanel);
+        detailPanel = details.getActivePanel();
+        this.add(detailPanel);
+        this.revalidate();
+        this.repaint();
        
     }
 }
