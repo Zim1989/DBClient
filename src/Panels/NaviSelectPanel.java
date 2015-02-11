@@ -27,34 +27,23 @@ public class NaviSelectPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 153, 153));
         setMaximumSize(new java.awt.Dimension(2000, 5000));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("Status:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setMaximumSize(new java.awt.Dimension(500, 500));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+        setLayout(new java.awt.BorderLayout());
 
         jLabel2.setText("Sortiert nach:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, -1));
+        add(jLabel2, java.awt.BorderLayout.CENTER);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+        add(jComboBox2, java.awt.BorderLayout.LINE_END);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

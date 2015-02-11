@@ -20,6 +20,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.beans.PropertyChangeSupport;
 import KonstantenKlassen.ConstantStrings;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -33,9 +36,11 @@ public class TreePanel extends javax.swing.JPanel implements
     private Start.OracleConnector con;
     private ResultSet result;
     private Statement st;
+    private List<String> projekte;
     protected final PropertyChangeSupport pcs;
 
     public TreePanel() {
+        projekte = new ArrayList<>();
         initComponents();
         this.pcs = new PropertyChangeSupport(this);
     }
@@ -43,7 +48,7 @@ public class TreePanel extends javax.swing.JPanel implements
     public void initTree(Start.OracleConnector con) {
         this.con = con;
         jScrollPane1 = new JScrollPane();
-    DefaultMutableTreeNode top = new DefaultMutableTreeNode("Projekte");
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Projekte");
         createNodes(top);
         naviTree = new JTree(top);
         naviTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -55,16 +60,20 @@ public class TreePanel extends javax.swing.JPanel implements
     private void createNodes(DefaultMutableTreeNode top) {
         DefaultMutableTreeNode projekt;
         DefaultMutableTreeNode view;
+        Comparator<String> comparator = new Util.StringComparator();
         try {
             st = con.dbcon.createStatement();
             if (st == null) {
                 return;
             }
             result = st.executeQuery("SELECT name FROM Baumassnahme");
-            String name;
-            while (result.next()) {
-                name = result.getString(1);
-                projekt = new DefaultMutableTreeNode(name);
+            //String name;
+            while(result.next()){
+                  projekte.add(result.getString(1));
+            }
+            java.util.Collections.sort(projekte, comparator);
+            for(String s : projekte){
+                projekt = new DefaultMutableTreeNode(s);
                 top.add(projekt);
                 view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.PERSONS);
                 projekt.add(view);
@@ -105,10 +114,8 @@ public class TreePanel extends javax.swing.JPanel implements
             } else {
                 String name2 = (String)(((DefaultMutableTreeNode) node.getParent()).getUserObject());
                 pcs.firePropertyChange(name2 + ConstantStrings.SEPARATOR
-                        + name, null, 1);
-                
+                        + name, null, 1);               
             }
-
         }
     }
 
