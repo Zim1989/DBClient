@@ -67,6 +67,7 @@ public class TreePanel extends javax.swing.JPanel implements
                 return;
             }
             result = st.executeQuery("SELECT name FROM Baumassnahme");
+            System.out.println(st.getUpdateCount());
             //String name;
             while(result.next()){
                   projekte.add(result.getString(1));

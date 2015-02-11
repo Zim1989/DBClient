@@ -23,6 +23,7 @@ public class BauProjektVerwaltung {
         
         OracleConnector c = new OracleConnector(ConnectionInfo.PUTTY_CONNECTION);
         MainFrame frame = new MainFrame(c);
+        
         //Controller controller = new Controller(frame, c);
         //c.dbcon.close();
     }
