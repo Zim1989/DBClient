@@ -36,7 +36,7 @@ public class DetailContainer {
         detailPanel.add(new MitarbeiterPanel(this)); //3
         detailPanel.add(new ObjektPanel(this)); //4
         detailPanel.add(new FachamtPanel(this)); //5
-        detailPanel.add(new AuftragnehmerPanel()); //6
+        detailPanel.add(new AuftragnehmerPanel(this)); //6
         
         
         active = detailPanel.get(0);
