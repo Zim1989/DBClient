@@ -131,6 +131,7 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(600, 500));
         setLayout(new java.awt.GridLayout(5, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -150,7 +151,6 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("jLabel6");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -168,7 +168,6 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("jLabel13");
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
@@ -182,7 +181,7 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("jLabel12");
+        jLabel12.setPreferredSize(new java.awt.Dimension(300, 500));
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel12MouseClicked(evt);
