@@ -51,6 +51,7 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
                 this.jTextField2.setText(result.getString(2));
                 this.jTextField3.setText(result.getString(3));
             }
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,6 +107,11 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
         jPanel2.add(jButton2);
 
         jButton1.setText("Speichern");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
 
         jPanel1.add(jPanel2);
@@ -116,6 +122,17 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            int i = st.executeUpdate("update mitarbeiter set name='"+this.jTextField1.getText()+"', tel='"+this.jTextField2.getText()+
+                    "', email='"+this.jTextField3.getText()+"' where name='"+name+"'");
+            dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }                       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
