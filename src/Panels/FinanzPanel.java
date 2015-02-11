@@ -5,17 +5,47 @@
  */
 package Panels;
 
+
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYDotRenderer;
+import org.jfree.data.xy.*;
+
 /**
  *
- * @author noito_000
+ * @author Marco
  */
 public class FinanzPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form FinanzPanel
      */
+    private DefaultXYDataset dataset;
+    private NumberAxis yax;
+    private NumberAxis xax;
+    private XYDotRenderer dot;
+    private double [][] A = {{1,2,5},{3,4,0}};
+    private XYPlot plot;
+    private JFreeChart chart1;
+    private ChartPanel chartPanel2;
+    
     public FinanzPanel() {
         initComponents();
+        
+
+    dataset = new DefaultXYDataset();
+    dataset.addSeries("xy", A);    // A wird unter dem Namen xy abgespeichert
+    dot = new XYDotRenderer();
+    dot.setDotHeight(5);
+    dot.setDotWidth(5);
+    xax = new NumberAxis("x");
+    yax = new NumberAxis("y"); 
+    plot = new XYPlot(dataset,xax,yax, dot);
+    chart1 = new JFreeChart(plot);
+    chartPanel2 = new ChartPanel(chart1);
+    this.add(chartPanel2);
     }
 
     /**
@@ -27,57 +57,19 @@ public class FinanzPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-
-        setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Finanzen");
-        add(jLabel1, java.awt.BorderLayout.PAGE_START);
-
-        jPanel1.setLayout(new java.awt.GridLayout(2, 2));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Ausgaben");
-        jPanel1.add(jLabel2);
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Budget");
-        jPanel1.add(jLabel3);
-
-        jPanel2.setLayout(new java.awt.GridLayout());
-
-        jButton1.setText("+");
-        jPanel2.add(jButton1);
-
-        jPanel1.add(jPanel2);
-
-        jPanel3.setLayout(new java.awt.GridLayout());
-
-        jButton2.setText("+");
-        jPanel3.add(jButton2);
-
-        jPanel1.add(jPanel3);
-
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
