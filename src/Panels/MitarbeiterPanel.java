@@ -5,6 +5,8 @@
  */
 package Panels;
 
+import KonstantenKlassen.ConstantStrings;
+import java.beans.PropertyChangeSupport;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,18 +21,22 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
 
     private DetailContainer dc;
     private String name;
+    private String projekt;
     private ResultSet result;
     private Statement st;
+    protected final PropertyChangeSupport pcs;
     /**
      * Creates new form MitarbeiterPanel
      */
     public MitarbeiterPanel(DetailContainer dc) {
         this.dc = dc;
         initComponents();
+        this.pcs = new PropertyChangeSupport(this);
+        
     }
     
-     public void setName(String name) {
-        
+     public void setName(String name, String projekt) {
+        this.projekt = projekt;
         this.name = name;
     }
     public void callDb() {
@@ -40,11 +46,10 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
             result = st.executeQuery("select a.name, a.tel, a.email, b.name from mitarbeiter a, fachamt b "
                     + "where a.name = '"+name+"' and a.BAUMASSNAHME_IDMASSNAHME = b.IDAMT");
             while(result.next()){
-                System.out.println("while:+"+result.getString(1));
                 this.jLabel2.setText(result.getString(4));
                 this.jTextField1.setText(result.getString(1));
                 this.jTextField2.setText(result.getString(2));
-                this.jTextField2.setText(result.getString(3));
+                this.jTextField3.setText(result.getString(3));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,7 +73,6 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
         jTextField3 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -94,10 +98,12 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.GridLayout(1, 3));
 
         jButton2.setText("Abbrechen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton2);
-
-        jButton3.setText("Reset");
-        jPanel2.add(jButton3);
 
         jButton1.setText("Speichern");
         jPanel2.add(jButton1);
@@ -107,11 +113,16 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        pcs.firePropertyChange(projekt+ ConstantStrings.SEPARATOR
+                        + ConstantStrings.SUMMARY, null, 1);
+        System.out.print(projekt);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

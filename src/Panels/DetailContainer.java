@@ -81,7 +81,7 @@ public class DetailContainer {
                     break;
                 case "Beteiligte":                    
                     active = detailPanel.get(3);
-                    ((MitarbeiterPanel)active).setName("Simon Horn");
+                    ((MitarbeiterPanel)active).setName("Simon Horn", name);
                     ((MitarbeiterPanel)active).callDb();
                     changed();
                     break;
