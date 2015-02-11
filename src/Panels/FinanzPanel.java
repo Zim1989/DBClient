@@ -32,11 +32,11 @@ public class FinanzPanel extends javax.swing.JPanel {
     public FinanzPanel() {
         initComponents();
         
-    pieDataset.setValue("vorhanden", 75);
+    /*pieDataset.setValue("vorhanden", 75);
     pieDataset.setValue("ausgegeben", 25);
     chart1 = new ChartFactory.createPieChart("test", pieDataset, true, false,false);
     chartPanel2 = new ChartPanel(chart1);
-    this.add(chartPanel2, BorderLayout.NORTH);
+    this.add(chartPanel2, BorderLayout.NORTH);*/
     }
 
     /**

@@ -5,17 +5,50 @@
  */
 package Panels;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author noito_000
  */
 public class MitarbeiterPanel extends javax.swing.JPanel {
 
+    private DetailContainer dc;
+    private String name;
+    private ResultSet result;
+    private Statement st;
     /**
      * Creates new form MitarbeiterPanel
      */
-    public MitarbeiterPanel() {
+    public MitarbeiterPanel(DetailContainer dc) {
+        this.dc = dc;
         initComponents();
+    }
+    
+     public void setName(String name) {
+        
+        this.name = name;
+    }
+    public void callDb() {
+        try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            
+            result = st.executeQuery("select a.name, a.tel, a.email, b.name from mitarbeiter a, fachamt b "
+                    + "where a.name = '"+name+"' and a.BAUMASSNAHME_IDMASSNAHME = b.IDAMT");
+            while(result.next()){
+                System.out.println("while:+"+result.getString(1));
+                this.jLabel2.setText(result.getString(4));
+                this.jTextField1.setText(result.getString(1));
+                this.jTextField2.setText(result.getString(2));
+                this.jTextField2.setText(result.getString(3));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,8 +63,6 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -48,14 +79,8 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.GridLayout(7, 0));
 
-        jLabel2.setText("IDMitarbeiter");
+        jLabel2.setText("Fachamt:");
         jPanel1.add(jLabel2);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2);
 
         jTextField1.setText("Name");
         jPanel1.add(jTextField1);
@@ -87,8 +112,6 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
