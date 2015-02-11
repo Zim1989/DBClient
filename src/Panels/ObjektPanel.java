@@ -5,6 +5,11 @@
  */
 package Panels;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author noito_000
@@ -14,8 +19,38 @@ public class ObjektPanel extends javax.swing.JPanel {
     /**
      * Creates new form ObjektPanel
      */
-    public ObjektPanel() {
+    private DetailContainer dc;
+    private String name;
+    private String projekt;
+    private ResultSet result;
+    private Statement st;
+    
+    public ObjektPanel(DetailContainer dc) {
+        this.dc = dc;
         initComponents();
+    }
+
+     public void setName(String name, String projekt) {
+        this.projekt = projekt;
+        this.name = name;
+    }
+    
+    public void callDb() {
+        try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            
+            result = st.executeQuery("select a.name, a.adresse, a.liegenschaft, a.eigentuemer, a.kategorie\n" +
+"from objekt a\n" +
+"where a.name = '"+name+"'");
+            while(result.next()){
+                this.jTextField2.setText(result.getString(1));
+                this.jTextField3.setText(result.getString(2));
+                this.jTextField4.setText(result.getString(3));
+                this.jTextField5.setText(result.getString(4));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -29,7 +64,6 @@ public class ObjektPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
@@ -41,13 +75,11 @@ public class ObjektPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("Objekt");
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setLayout(new java.awt.GridLayout(6, 0));
-
-        jTextField1.setText("IDObjekt");
-        jPanel1.add(jTextField1);
 
         jTextField2.setText("Name");
         jPanel1.add(jTextField2);
@@ -85,7 +117,6 @@ public class ObjektPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

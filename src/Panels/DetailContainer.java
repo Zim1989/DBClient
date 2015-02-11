@@ -34,6 +34,7 @@ public class DetailContainer {
         detailPanel.add(new FinanzPanel());
         detailPanel.add(new BeteiligetePanel());
         detailPanel.add(new MitarbeiterPanel(this));
+        detailPanel.add(new ObjektPanel(this));
         active = detailPanel.get(0);
     }
   
@@ -78,6 +79,14 @@ public class DetailContainer {
                     active = detailPanel.get(0);
                     ((DefaultPanel)active).setString(name);
                     ((DefaultPanel)active).callDb();
+                    changed();
+                    break;
+                case "Objekt":
+                    String objekt = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
+                    name = s.substring(0, s.indexOf("$$"));
+                    active = detailPanel.get(4);
+                    ((ObjektPanel)active).setName(objekt, name);
+                    ((ObjektPanel)active).callDb();
                     changed();
                     break;
                 case "Mitarbeiter":
