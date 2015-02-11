@@ -29,35 +29,12 @@ public class DetailContainer {
         this.pcs = new PropertyChangeSupport(this);
         this.oc = oc;
         detailPanel = new ArrayList<JPanel>();
-        detailPanel.add(new PanelCreate.DefaultPanel(this));
+        detailPanel.add(new Panels.DefaultPanel(this));
         detailPanel.add(new FinanzPanel());
         detailPanel.add(new BeteiligetePanel());
         active = detailPanel.get(0);
     }
-    public String[] getData(String statment) {
-        Statement st;
-        ResultSet result;
-        ArrayList<String> tmpArray = new ArrayList<String>();
-        
-        try {
-            st = oc.dbcon.createStatement();
-            if(st==null){
-                return null;
-            }
-            result = st.executeQuery("SELECT name FROM Baumassnahme");
-            String name;
-            while (result.next()) {
-                name = result.getString(1);
-                System.out.println(name);
-            }
-            st.close();
-            return null;
-        } catch (SQLException ex) {
-            Logger.getLogger(TreePanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-    
+  
     public void dbTest() {
         Statement st;
         ResultSet result;
@@ -83,6 +60,9 @@ public class DetailContainer {
         return active;
     }
 
+    public Start.OracleConnector getOracleConnector() {
+        return oc;
+    }
     public void changeActive(String s) {
         
         String name;
@@ -93,6 +73,8 @@ public class DetailContainer {
             switch(view){
                 case "Allgemein":
                     active = detailPanel.get(0);
+                    ((DefaultPanel)active).setObjekt(name);
+                    ((DefaultPanel)active).callDb();
                     changed();
                     break;
                 case "Beteiligte":
