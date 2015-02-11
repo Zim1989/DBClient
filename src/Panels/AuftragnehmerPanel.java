@@ -29,14 +29,12 @@ public class AuftragnehmerPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -46,9 +44,6 @@ public class AuftragnehmerPanel extends javax.swing.JPanel {
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setLayout(new java.awt.GridLayout(6, 0));
-
-        jLabel2.setText("IDAuftragnehmer");
-        jPanel1.add(jLabel2);
 
         jTextField1.setText("Name");
         jPanel1.add(jTextField1);
@@ -67,9 +62,6 @@ public class AuftragnehmerPanel extends javax.swing.JPanel {
         jButton2.setText("Abbrechen");
         jPanel2.add(jButton2);
 
-        jButton3.setText("Reset");
-        jPanel2.add(jButton3);
-
         jButton1.setText("Speichern");
         jPanel2.add(jButton1);
 
@@ -82,9 +74,7 @@ public class AuftragnehmerPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;

@@ -76,8 +76,6 @@ public class TreePanel extends javax.swing.JPanel implements
             for(String s : projekte){
                 projekt = new DefaultMutableTreeNode(s);
                 top.add(projekt);
-                view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.PERSONS);
-                projekt.add(view);
                 view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.MONEY);
                 projekt.add(view);
             }
