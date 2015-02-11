@@ -30,11 +30,15 @@ public class DetailContainer {
         this.oc = oc;
         detailPanel = new ArrayList<JPanel>();
         
-        detailPanel.add(new Panels.DefaultPanel(this));
-        detailPanel.add(new FinanzPanel());
-        detailPanel.add(new BeteiligetePanel());
-        detailPanel.add(new MitarbeiterPanel(this));
-        detailPanel.add(new ObjektPanel(this));
+        detailPanel.add(new Panels.DefaultPanel(this)); //0
+        detailPanel.add(new FinanzPanel()); //1
+        detailPanel.add(new BeteiligetePanel()); //2
+        detailPanel.add(new MitarbeiterPanel(this)); //3
+        detailPanel.add(new ObjektPanel(this)); //4
+        detailPanel.add(new FachamtPanel(this)); //5
+        detailPanel.add(new AuftragnehmerPanel()); //6
+        
+        
         active = detailPanel.get(0);
     }
   
@@ -97,13 +101,29 @@ public class DetailContainer {
                     ((MitarbeiterPanel)active).callDb();
                     changed();
                     break;
-                case "Beteiligte":                    
+                case "Fachamt":
+                    String fachamt = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
+                    name = s.substring(0, s.indexOf("$$"));
+                    active = detailPanel.get(3);
+                    ((MitarbeiterPanel)active).setName(fachamt, name);
+                    ((MitarbeiterPanel)active).callDb();
+                    changed();
+                    break;
+                case "Auftragnehmer":
+                    String auftragnehmer = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
+                    name = s.substring(0, s.indexOf("$$"));
+                    active = detailPanel.get(3);
+                    ((MitarbeiterPanel)active).setName(auftragnehmer, name);
+                    ((MitarbeiterPanel)active).callDb();
+                    changed();
+                    break;
+/*                case "Beteiligte":                    
                     active = detailPanel.get(3);
                     ((MitarbeiterPanel)active).setName("Simon Horn", name);
                     ((MitarbeiterPanel)active).callDb();
                     changed();
                     break;
-                case "Finanzen":
+*/                case "Finanzen":
                     active = detailPanel.get(1);
                     changed();
                     break;

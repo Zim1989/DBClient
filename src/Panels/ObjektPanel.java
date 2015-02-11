@@ -96,6 +96,11 @@ public class ObjektPanel extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.GridLayout(1, 3));
 
         jButton2.setText("Abbrechen");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton2);
 
         jButton3.setText("Reset");
@@ -108,6 +113,11 @@ public class ObjektPanel extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
