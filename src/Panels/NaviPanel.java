@@ -39,18 +39,15 @@ public class NaviPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        naviSelectPanel2 = new Panels.NaviSelectPanel();
         treePanel1 = new Panels.TreePanel();
 
         setBackground(new java.awt.Color(153, 255, 153));
         setLayout(new java.awt.BorderLayout());
-        add(naviSelectPanel2, java.awt.BorderLayout.PAGE_START);
         add(treePanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Panels.NaviSelectPanel naviSelectPanel2;
     private Panels.TreePanel treePanel1;
     // End of variables declaration//GEN-END:variables
     private Start.OracleConnector con;

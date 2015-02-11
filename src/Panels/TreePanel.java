@@ -105,6 +105,8 @@ public class TreePanel extends javax.swing.JPanel implements
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) naviTree.getLastSelectedPathComponent();
+        if(node == null)
+            return;
         String name = (String) node.getUserObject();
         if (!(node.isRoot())) {
             if (node.getParent() == node.getRoot()) {
