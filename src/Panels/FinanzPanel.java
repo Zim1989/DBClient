@@ -6,12 +6,14 @@
 package Panels;
 
 
-import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYDotRenderer;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.*;
 
 /**
@@ -23,31 +25,18 @@ public class FinanzPanel extends javax.swing.JPanel {
     /**
      * Creates new form FinanzPanel
      */
-    private DefaultXYDataset dataset;
-    private NumberAxis yax;
-    private NumberAxis xax;
-    private XYDotRenderer dot;
-    private double [][] A = {{1,2,5},{3,4,0}};
-    private XYPlot plot;
+    private DefaultPieDataset pieDataset;
     private JFreeChart chart1;
     private ChartPanel chartPanel2;
     
     public FinanzPanel() {
         initComponents();
         
-
-    dataset = new DefaultXYDataset();
-    dataset.addSeries("xy", A);    // A wird unter dem Namen xy abgespeichert
-    dot = new XYDotRenderer();
-    dot.setDotHeight(5);
-    dot.setDotWidth(5);
-    xax = new NumberAxis("x");
-    yax = new NumberAxis("y"); 
-    plot = new XYPlot(dataset,xax,yax, dot);
-    chart1 = new JFreeChart(plot);
+    /*pieDataset.setValue("vorhanden", 75);
+    pieDataset.setValue("ausgegeben", 25);
+    chart1 = new ChartFactory.createPieChart("test", pieDataset, true, false,false);
     chartPanel2 = new ChartPanel(chart1);
-    this.add(chartPanel2);
-    this.add(new JLabel("test"));
+    this.add(chartPanel2, BorderLayout.NORTH);*/
     }
 
     /**
@@ -59,16 +48,7 @@ public class FinanzPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.BorderLayout());
     }// </editor-fold>//GEN-END:initComponents
 
 
