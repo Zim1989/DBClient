@@ -34,9 +34,10 @@ public class DefaultPanel extends JPanel implements ActionListener {
 
     }
     
-    public void changelabel(){
-        count++;
-        this.lblDefaultpanel.setText(""+count+"");
+    public void changelabel(String s){
+        
+        //count++;
+        this.lblDefaultpanel.setText(s);//""+count+"");
     }
 
     @Override

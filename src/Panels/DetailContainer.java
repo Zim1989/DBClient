@@ -81,12 +81,14 @@ public class DetailContainer {
         String name;
         try {
             name = s.substring(0, s.indexOf("##") );
+            active = detailPanel.get(0);
+            ((DefaultPanel)active).changelabel(name);
+
         } catch (java.lang.StringIndexOutOfBoundsException e) {
             name = "nüscht";
         }
         System.out.println(name);
-        active = detailPanel.get(0);
-        ((DefaultPanel)active).changelabel();
+            
         //dbTest();
 		//new JDialog(null, "test");
         //JOptionPane.showMessageDialog(null, "Test", "Test Titel", JOptionPane.OK_CANCEL_OPTION);
