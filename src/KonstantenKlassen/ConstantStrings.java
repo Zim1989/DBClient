@@ -13,6 +13,6 @@ public final class ConstantStrings {
      public static String SUMMARY = "Allgemein";
      public static String MONEY = "Finanzen";
      public static String PERSONS = "Beteiligte";
-     public static String SEPRATOR = "##";
+     public static String SEPARATOR = "##";
      
 }

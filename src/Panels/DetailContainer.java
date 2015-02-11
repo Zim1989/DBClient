@@ -3,7 +3,12 @@ package Panels;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -13,6 +18,8 @@ public class DetailContainer {
     protected JPanel active;
     protected Start.OracleConnector oc;
     protected final PropertyChangeSupport pcs;
+    private ResultSet result;
+    private Statement st;
    
 
     public DetailContainer(Start.OracleConnector oc) {
@@ -37,6 +44,8 @@ public class DetailContainer {
     }
     
     public void changed(){
+        
+        
         pcs.firePropertyChange("change", active, 1);
     }
     

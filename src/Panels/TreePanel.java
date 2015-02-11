@@ -19,6 +19,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.beans.PropertyChangeSupport;
+import KonstantenKlassen.ConstantStrings;
 
 /**
  *
@@ -56,7 +57,7 @@ public class TreePanel extends javax.swing.JPanel implements
         DefaultMutableTreeNode view;
         try {
             st = con.dbcon.createStatement();
-            if(st==null){
+            if (st == null) {
                 return;
             }
             result = st.executeQuery("SELECT name FROM Baumassnahme");
@@ -65,8 +66,6 @@ public class TreePanel extends javax.swing.JPanel implements
                 name = result.getString(1);
                 projekt = new DefaultMutableTreeNode(name);
                 top.add(projekt);
-                view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.SUMMARY);
-                projekt.add(view);
                 view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.PERSONS);
                 projekt.add(view);
                 view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.MONEY);
@@ -76,11 +75,7 @@ public class TreePanel extends javax.swing.JPanel implements
         } catch (SQLException ex) {
             Logger.getLogger(TreePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
 
-    private void deleteNote(String name) {
-        //this.naviTree.get
     }
 
     /**
@@ -101,26 +96,29 @@ public class TreePanel extends javax.swing.JPanel implements
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) naviTree.getLastSelectedPathComponent();
-
-        if (node == null) //Nothing is selected.     
-        {
-            return;
-        }
         String name = (String) node.getUserObject();
-        //node.get
         if (!(node.isRoot())) {
-            pcs.firePropertyChange("change", null, 1);
+            if (node.getParent() == node.getRoot()) {
+                pcs.firePropertyChange(name + ConstantStrings.SEPARATOR
+                        + ConstantStrings.SUMMARY, null, 1);
+                System.out.println(name+ConstantStrings.SEPARATOR+ConstantStrings.SUMMARY);
+            } else {
+                String name2 = (String)(((DefaultMutableTreeNode) node.getParent()).getUserObject());
+                pcs.firePropertyChange(name2 + ConstantStrings.SEPARATOR
+                        + name, null, 1);
+                System.out.println(name2+ConstantStrings.SEPARATOR+name);
+            }
+
         }
     }
-    
-    public void addListener(PropertyChangeListener listener){
+
+    public void addListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
 
-    
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        switch(evt.getPropertyName()){
+        switch (evt.getPropertyName()) {
             case "change":
                 System.out.println("schmu");
                 break;
