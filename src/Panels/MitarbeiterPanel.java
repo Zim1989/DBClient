@@ -126,8 +126,9 @@ public class MitarbeiterPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             st = this.dc.getOracleConnector().dbcon.createStatement();
-            result = st.executeQuery("select a.name, a.tel, a.email, b.name from mitarbeiter a, fachamt b "
-                    + "where a.name = '"+name+"' and a.BAUMASSNAHME_IDMASSNAHME = b.IDAMT");
+            int i = st.executeUpdate("update mitarbeiter set name='"+this.jTextField1.getText()+"', tel='"+this.jTextField2.getText()+
+                    "', email='"+this.jTextField3.getText()+"' where name='"+name+"'");
+            dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
         } catch (SQLException ex) {
             Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
         }                       
