@@ -34,6 +34,9 @@ public class FachamtPanel extends javax.swing.JPanel {
     public void setName(String name, String projekt) {
         this.projekt = projekt;
         this.name = name;
+        //System.out.println("..."+name);
+        //System.out.println("..."+projekt);
+        
     }
     
     public void callDb() {
@@ -41,7 +44,7 @@ public class FachamtPanel extends javax.swing.JPanel {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
             result = st.executeQuery("select name, adresse" +
-                    "from fachamt where name = '"+name+"'");
+                    " from fachamt where name = '"+name+"'");
             while(result.next()){ 
                 this.jTextField1.setText(result.getString(1));
                 this.jTextField2.setText(result.getString(2));

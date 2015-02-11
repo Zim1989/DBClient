@@ -41,7 +41,7 @@ public class AuftragnehmerPanel extends javax.swing.JPanel {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
             result = st.executeQuery("select name, tel, adresse, email" +
-                    "from auftragnehmer where name = '"+name+"'");
+                    " from auftragnehmer where name = '"+name+"'");
             while(result.next()){ 
                 this.jTextField1.setText(result.getString(1));
                 this.jTextField2.setText(result.getString(2));

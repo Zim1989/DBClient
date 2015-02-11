@@ -104,17 +104,17 @@ public class DetailContainer {
                 case "Fachamt":
                     String fachamt = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
                     name = s.substring(0, s.indexOf("$$"));
-                    active = detailPanel.get(3);
-                    ((MitarbeiterPanel)active).setName(fachamt, name);
-                    ((MitarbeiterPanel)active).callDb();
+                    active = detailPanel.get(5);
+                    ((FachamtPanel)active).setName(name, fachamt);
+                    ((FachamtPanel)active).callDb();
                     changed();
                     break;
                 case "Auftragnehmer":
                     String auftragnehmer = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
                     name = s.substring(0, s.indexOf("$$"));
-                    active = detailPanel.get(3);
-                    ((MitarbeiterPanel)active).setName(auftragnehmer, name);
-                    ((MitarbeiterPanel)active).callDb();
+                    active = detailPanel.get(6);
+                    ((AuftragnehmerPanel)active).setName(name, auftragnehmer);
+                    ((AuftragnehmerPanel)active).callDb();
                     changed();
                     break;
 /*                case "Beteiligte":                    
