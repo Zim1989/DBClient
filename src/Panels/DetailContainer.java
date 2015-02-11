@@ -29,9 +29,11 @@ public class DetailContainer {
         this.pcs = new PropertyChangeSupport(this);
         this.oc = oc;
         detailPanel = new ArrayList<JPanel>();
+        
         detailPanel.add(new Panels.DefaultPanel(this));
         detailPanel.add(new FinanzPanel());
         detailPanel.add(new BeteiligetePanel());
+        
         active = detailPanel.get(0);
     }
   
@@ -73,7 +75,7 @@ public class DetailContainer {
             switch(view){
                 case "Allgemein":
                     active = detailPanel.get(0);
-                    ((DefaultPanel)active).setObjekt(name);
+                    ((DefaultPanel)active).setString(name);
                     ((DefaultPanel)active).callDb();
                     changed();
                     break;

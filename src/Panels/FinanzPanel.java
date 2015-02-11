@@ -6,6 +6,7 @@
 package Panels;
 
 
+import javax.swing.JLabel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
@@ -46,6 +47,7 @@ public class FinanzPanel extends javax.swing.JPanel {
     chart1 = new JFreeChart(plot);
     chartPanel2 = new ChartPanel(chart1);
     this.add(chartPanel2);
+    this.add(new JLabel("test"));
     }
 
     /**

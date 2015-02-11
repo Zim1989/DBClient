@@ -31,9 +31,15 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
     public DefaultPanel(DetailContainer dc) {
         this.dc = dc;
         oc = dc.getOracleConnector();
+        
         initComponents();
+                        jLabel7.setText("");
+                jLabel8.setText("");
+                jLabel9.setText("");
+                jLabel10.setText("");
+                jLabel11.setText("");
     }
-    public void setObjekt(String o) {
+    public void setString(String o) {
         objekt = o;
     }
     public void callDb() {
@@ -49,9 +55,39 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
             while (result.next()) {
                 name = result.getString(1);
                 jLabel1.setText(name);
+                jLabel6.setText(result.getString(2));
+                jLabel13.setText(result.getString(4));
+                jLabel12.setText(result.getString(3));
                 System.out.println(name);
             }
+//            st.close();
+            result = st.executeQuery("select b.name from MITARBEITER b, BAUMASSNAHME a where a.name='"+objekt+"' and  a.IDMASSNAHME = b.BAUMASSNAHME_IDMASSNAHME");
+            int counter = 7;
+
+                
+            while (result.next()) {
+                name = result.getString(1);
+                switch(counter++) {
+                    case 7:
+                        jLabel7.setText(result.getString(1));
+                        break;
+                    case 8:
+                        jLabel8.setText(result.getString(1));
+                        break;
+                    case 9:
+                        jLabel9.setText(result.getString(1));
+                        break;
+                    case 10:
+                        jLabel10.setText(result.getString(1));
+                        break;
+                    case 11:
+                        jLabel11.setText(result.getString(1));
+                        break;
+                }                
+            }
             st.close();
+           
+            
         } catch (SQLException ex) {
             Logger.getLogger(TreePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,11 +125,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridLayout(5, 0));
 
@@ -149,20 +185,20 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 5));
 
+        jLabel7.setText("jLabel7");
+        jPanel5.add(jLabel7);
+
         jLabel8.setText("jLabel8");
         jPanel5.add(jLabel8);
-
-        jLabel10.setText("jLabel10");
-        jPanel5.add(jLabel10);
 
         jLabel9.setText("jLabel9");
         jPanel5.add(jLabel9);
 
+        jLabel10.setText("jLabel10");
+        jPanel5.add(jLabel10);
+
         jLabel11.setText("jLabel11");
         jPanel5.add(jLabel11);
-
-        jLabel7.setText("jLabel7");
-        jPanel5.add(jLabel7);
 
         jPanel3.add(jPanel5, java.awt.BorderLayout.CENTER);
 
