@@ -169,6 +169,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("jLabel13");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel13, java.awt.BorderLayout.CENTER);
 
         add(jPanel1);
@@ -178,6 +183,11 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("jLabel12");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel12, java.awt.BorderLayout.CENTER);
 
         add(jPanel2);
@@ -278,6 +288,20 @@ public class DefaultPanel extends javax.swing.JPanel implements ActionListener{
         dc.changeActive(jLabel6.getText()+"$$"+jLabel1.getText()+"##Mitarbeiter" );
 
      }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        if(jLabel13.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel13.getText()+"$$"+jLabel1.getText()+"##Fachamt" );
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        if(jLabel12.getText()=="") {
+            return;
+        }
+        dc.changeActive(jLabel12.getText()+"$$"+jLabel1.getText()+"##Auftragnehmer" );
+    }//GEN-LAST:event_jLabel12MouseClicked
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
