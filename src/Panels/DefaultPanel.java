@@ -16,6 +16,11 @@ public class DefaultPanel extends JPanel implements ActionListener {
     /**
      * Create the panel.
      */
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    
     protected int count = 0;
     JLabel lblDefaultpanel;
     JButton jimmini;

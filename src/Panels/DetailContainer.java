@@ -29,13 +29,16 @@ public class DetailContainer {
         this.pcs = new PropertyChangeSupport(this);
         this.oc = oc;
         detailPanel = new ArrayList<JPanel>();
-        detailPanel.add(new DefaultPanel(this));
+        detailPanel.add(new PanelCreate.DefaultPanel(this));
         detailPanel.add(new FinanzPanel());
+        detailPanel.add(new BeteiligetePanel());
         active = detailPanel.get(0);
     }
     public String[] getData(String statment) {
         Statement st;
         ResultSet result;
+        ArrayList<String> tmpArray = new ArrayList<String>();
+        
         try {
             st = oc.dbcon.createStatement();
             if(st==null){
@@ -93,7 +96,8 @@ public class DetailContainer {
                     changed();
                     break;
                 case "Beteiligte":
-                    
+                    active = detailPanel.get(2);
+                    changed();
                     break;
                 case "Finanzen":
                     active = detailPanel.get(1);

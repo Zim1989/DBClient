@@ -28,56 +28,50 @@ public class FinanzPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Finanzen");
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setLayout(new java.awt.GridLayout(2, 2));
+        jPanel6.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Ausgaben");
-        jPanel1.add(jLabel2);
+        jPanel1.setBackground(new java.awt.Color(153, 255, 51));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 2));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Budget");
-        jPanel1.add(jLabel3);
+        jPanel4.setBackground(new java.awt.Color(255, 255, 0));
+        jPanel4.setLayout(new java.awt.GridLayout());
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel10.setBackground(new java.awt.Color(102, 0, 255));
+        jPanel4.add(jPanel10);
 
-        jButton1.setText("+");
-        jPanel2.add(jButton1);
+        jPanel9.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.add(jPanel9);
 
-        jPanel1.add(jPanel2);
+        jPanel1.add(jPanel4);
+        jPanel1.add(jPanel5);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel6.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        jButton2.setText("+");
-        jPanel3.add(jButton2);
-
-        jPanel1.add(jPanel3);
-
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        add(jPanel6, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 }
