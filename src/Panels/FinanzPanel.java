@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -67,6 +68,7 @@ public class FinanzPanel extends javax.swing.JPanel {
         chartPanel1.setMouseWheelEnabled(true);
         this.setLayout(new java.awt.BorderLayout());
         this.add(chartPanel1, BorderLayout.CENTER);
+        this.add(new JButton("back"), BorderLayout.SOUTH );
         this.validate();
     }
      public void setName(String name) {
