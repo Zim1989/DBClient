@@ -122,10 +122,16 @@ public class DetailContainer {
                     ((MitarbeiterPanel)active).callDb();
                     changed();
                     break;
-*/                case "Finanzen":
+*/              case "Finanzen":
                     active = detailPanel.get(7);
                     ((FinanzplanPanel)active).setName(name);
                     ((FinanzplanPanel)active).callDb();
+                    changed();
+                    break;
+                case "FinanzChart":
+                    active = detailPanel.get(1);
+                    ((FinanzPanel)active).setName(name);
+                    ((FinanzPanel)active).callDb();
                     changed();
                     break;
                 default:
