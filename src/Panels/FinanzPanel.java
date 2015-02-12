@@ -16,6 +16,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYDotRenderer;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
@@ -37,11 +38,12 @@ public class FinanzPanel extends javax.swing.JPanel {
     private ChartPanel chartPanel1;
     private double [][] A = {{1,2,5},{3,4,0}};
     //private DefaultXYDataset dataset;
-    
+     DefaultPieDataset dataset;
     private XYSplineRenderer renderer;
     NumberAxis xax;
     NumberAxis yax;
-    XYPlot plot;
+    //XYPlot plot;
+    PiePlot plot;
     String projekt;
     String name;
     private ResultSet result;
@@ -51,41 +53,49 @@ public class FinanzPanel extends javax.swing.JPanel {
     public FinanzPanel(DetailContainer dc) {
         this.dc = dc;
         initComponents();
-        dataset = new DefaultXYDataset();
-        dataset.addSeries("xy", A);
+        dataset = new DefaultPieDataset();;
+//        //dataset.addSeries("xy", A);
+//        dataset.setValue("One", new Double(43.2));
+//        dataset.setValue("Two", new Double(10.0));
         renderer = new XYSplineRenderer();
-        xax = new NumberAxis("x");
-        yax = new NumberAxis("y"); 
-        plot = new XYPlot(dataset,xax,yax, renderer);
+////        xax = new NumberAxis("x");
+////        yax = new NumberAxis("y");
+        plot = new PiePlot(dataset);
+//        //plot = new XYPlot(dataset,xax,yax, renderer);
         chart1 = new JFreeChart(plot);
         chartPanel1 = new ChartPanel(chart1);
         chartPanel1.setMouseWheelEnabled(true);
-    /*pieDataset.setValue("vorhanden", 75);
-    pieDataset.setValue("ausgegeben", 25);
-    chart1 = new ChartFactory.createPieChart("test", pieDataset, true, false,false);
-    chartPanel2 = new ChartPanel(chart1);
-    */  this.setLayout(new java.awt.BorderLayout());
+        this.setLayout(new java.awt.BorderLayout());
         this.add(chartPanel1, BorderLayout.CENTER);
         this.validate();
     }
-     public void setName(String name, String projekt) {
+     public void setName(String name) {
         this.projekt = name;
-        this.name = projekt;
+
     }
     
     public void callDb() {
+
+
         try {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
-            result = st.executeQuery("select a.name, a.adresse, a.liegenschaft, a.eigentuemer, a.kategorie\n" +
-"from objekt a\n" +
-"where a.name = '"+name+"'");
+            result = st.executeQuery("select * from finanzplan");
             while(result.next()){
-                this.jTextField2.setText(result.getString(1));
-                this.jTextField3.setText(result.getString(2));
-                this.jTextField4.setText(result.getString(3));
-                this.jTextField5.setText(result.getString(4));
+                
+                dataset.setValue("GEPLANT", new Double(result.getFloat("GEPLANT")));
+                dataset.setValue("VORHANDEN", new Double(result.getFloat("VORHANDEN")));
+
+
             }
+
+            plot = new PiePlot(dataset);
+            chart1 = new JFreeChart(plot);
+            chartPanel1 = new ChartPanel(chart1);
+            chartPanel1.setMouseWheelEnabled(true);
+            this.setLayout(new java.awt.BorderLayout());
+            this.add(chartPanel1, BorderLayout.CENTER);
+            this.validate();
         } catch (SQLException ex) {
             Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
