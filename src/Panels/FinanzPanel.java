@@ -82,7 +82,7 @@ public class FinanzPanel extends javax.swing.JPanel {
         try {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
-            result = st.executeQuery("select * from finanzplan");
+            result = st.executeQuery("select * from finanzplan where IDFinPlan='"+name+"'");
             while(result.next()){
                 
                 dataset.setValue("GEPLANT", new Double(result.getFloat("GEPLANT")));
