@@ -5,6 +5,12 @@
  */
 package Panels;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author noito_000
@@ -14,8 +20,41 @@ public class FinanzplanPanel extends javax.swing.JPanel {
     /**
      * Creates new form FinanzplanPanel
      */
-    public FinanzplanPanel() {
+    private DetailContainer dc;
+    private String name;
+    private ResultSet result;
+    private Statement st;
+    
+    public FinanzplanPanel(DetailContainer dc) {
+        this.dc = dc;
         initComponents();
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void callDb() {
+        try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            
+            result = st.executeQuery("select a.geplant, a.vohanden, a.ausgegeben, a.hj, a.verwnachweis" +
+                    ", d.name from finanzplan a, baustatus b, baumassnahme c, foerderprogramm d"+
+                    " where c.name = '"+name+"' and c.idmassnahme=b.baumassnahme_idmassnahme"+
+                    " and a.baustatus_idstatus=b.baumassnahme_idmassnahme and "+
+                    "a.foerderprogramm_idfprogramm=d.idfprogramm");
+            while(result.next()){ 
+                this.jTextField1.setText(result.getString(1));
+                this.jLabel3.setText(result.getString(2));
+                this.jTextField6.setText(result.getString(3));
+                this.jTextField2.setText(result.getString(4));
+                this.jTextField3.setText(result.getString(6));
+                this.jTextArea1.setText(result.getString(5));
+            }
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -29,16 +68,15 @@ public class FinanzplanPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -49,36 +87,49 @@ public class FinanzplanPanel extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.GridLayout(8, 0));
 
-        jLabel2.setText("IDFinPlan");
-        jPanel1.add(jLabel2);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-
         jTextField1.setText("Geplant");
         jPanel1.add(jTextField1);
 
-        jTextField2.setText("Vorhanden");
+        jLabel3.setText("Vorhanden");
+        jPanel1.add(jLabel3);
+
+        jTextField6.setText("Ausgegeben");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField6);
+
+        jTextField2.setText("Haushaltsjahr");
         jPanel1.add(jTextField2);
 
-        jTextField3.setText("Ausgegeben");
+        jTextField3.setText("Förderprogramm");
         jPanel1.add(jTextField3);
 
-        jTextField4.setText("Verwendungsnachweis");
-        jPanel1.add(jTextField4);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Verwendungs Nachweis\n");
+        jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField5.setText("Haushaltsjahr");
-        jPanel1.add(jTextField5);
+        jPanel1.add(jScrollPane1);
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 3));
 
         jButton2.setText("Abbrechen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton2);
 
-        jButton3.setText("Reset");
-        jPanel2.add(jButton3);
-
         jButton1.setText("Speichern");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
 
         jPanel1.add(jPanel2);
@@ -86,20 +137,40 @@ public class FinanzplanPanel extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dc.changeActive(name+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            int i = st.executeUpdate("update finanzplan a, foerderprogramm b set a.geplant='"+this.jTextField1.getText()+"', "+
+                    "a.ausgegeben='"+this.jTextField6.getText()+"', a.hj='"+this.jTextField2.getText()+
+                    "', a.vernachweis='"+this.jTextArea1.getText()+"',"+
+                    " b.name='"+this.jTextField3.getText()+"' where a.foerderprogramm_idfprogramm=b.idfprogramm");
+            dc.changeActive(name+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
