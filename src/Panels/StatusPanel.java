@@ -40,16 +40,15 @@ public class StatusPanel extends javax.swing.JPanel {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
             result = st.executeQuery("select a.fertig, a.plstand, a.dfstand, a.notizen"+
-                    " from baustatus a baumassnahme b where b.name='"+name+"' and"+
+                    " ,a.idstatus from baustatus a baumassnahme b where b.name='"+name+"' and"+
                     " b.idmassnahme=a.baumassnahme_idmassnahme");
             while(result.next()){ 
                 this.jTextField1.setText(result.getString(1));
                 this.jTextArea3.setText(result.getString(2));
-                this.jTextField6.setText(result.getString(3));
-                this.jTextField2.setText(result.getString(4));
-                this.jLabel2.setText(result.getString(6));
-                this.jTextArea1.setText(result.getString(5));
-                id = result.getInt(7);
+                this.jTextArea1.setText(result.getString(3));
+                this.jTextArea2.setText(result.getString(4));
+                id = result.getInt(5);
+                              
             }
             st.close();
         } catch (SQLException ex) {
@@ -119,11 +118,37 @@ public class StatusPanel extends javax.swing.JPanel {
         add(jScrollPane2);
 
         jButton1.setText("Abbrechen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1);
 
         jButton2.setText("Speichern");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dc.changeActive(name+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            int i = st.executeUpdate("update baustatus set fertig='"+this.jTextField1.getText()+"', "+
+                    "plstand='"+this.jTextArea3.getText()+"', dfstand='"+this.jTextArea1.getText()+
+                    "', notizen='"+this.jTextArea2.getText()+"' where idstatus="+id+"");
+            dc.changeActive(name+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
