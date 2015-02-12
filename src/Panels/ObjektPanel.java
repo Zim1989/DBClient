@@ -70,6 +70,7 @@ public class ObjektPanel extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -102,6 +103,14 @@ public class ObjektPanel extends javax.swing.JPanel {
         });
         jPanel2.add(jButton2);
 
+        jButton3.setText("Neu");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
+
         jButton1.setText("Speichern");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -126,16 +135,33 @@ public class ObjektPanel extends javax.swing.JPanel {
             int i = st.executeUpdate("update objekt set name='"+jTextField2.getText()+"', adresse='"+jTextField3.getText()+
                     "', liegenschaft='"+jTextField4.getText()+"', eigentuemer='"+jTextField5.getText()+"' where name='"+name+"'");
             dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
         }                       
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       try {
+            st = this.dc.getOracleConnector().dbcon.createStatement();
+            result = st.executeQuery("select max(idObjekt) from objekt");
+            int i = 1;
+            if(result.next()){
+                i=result.getInt(1);
+            }
+            st.executeUpdate("insert into objekt values ("+(i+1)+", '"+jTextField2.getText()+"', '"+jTextField3.getText()+"', '"+jTextField4.getText()+"', '"+jTextField5.getText()+"', null)");
+            dc.changeActive(projekt+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
+        } catch (SQLException ex) {
+            Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
