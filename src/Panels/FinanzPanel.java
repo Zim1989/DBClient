@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultButtonModel;
 import javax.swing.JButton;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -66,13 +67,14 @@ public class FinanzPanel extends javax.swing.JPanel {
         chart1 = new JFreeChart(plot);
         chartPanel1 = new ChartPanel(chart1);
         chartPanel1.setMouseWheelEnabled(true);
-        this.setLayout(new java.awt.BorderLayout());
-        this.add(chartPanel1, BorderLayout.CENTER);
-        this.add(new JButton("back"), BorderLayout.SOUTH );
+//        this.jPanel1.setLayout(new java.awt.BorderLayout());
+        this.jPanel1.add(chartPanel1);
+        this.jButton1.setModel(new DefaultButtonModel());
+//        this.add(new JButton("back"), BorderLayout.SOUTH );
         this.validate();
     }
      public void setName(String name) {
-        this.projekt = name;
+        this.name = name;
 
     }
     
@@ -81,8 +83,8 @@ public class FinanzPanel extends javax.swing.JPanel {
 
         try {
             st = this.dc.getOracleConnector().dbcon.createStatement();
-            
-            result = st.executeQuery("select * from finanzplan where IDFinPlan='"+name+"'");
+            System.out.println("-----______:"+name);
+            result = st.executeQuery("select * from finanzplan where IDFinPlan="+name+"");
             while(result.next()){
                 
                 dataset.setValue("GEPLANT", new Double(result.getFloat("GEPLANT")));
@@ -112,10 +114,31 @@ public class FinanzPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+
         setLayout(new java.awt.BorderLayout());
+
+        jButton1.setText("jButton1");
+        add(jButton1, java.awt.BorderLayout.PAGE_END);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 277, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

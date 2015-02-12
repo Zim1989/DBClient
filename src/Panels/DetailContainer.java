@@ -38,6 +38,7 @@ public class DetailContainer {
         detailPanel.add(new FachamtPanel(this)); //5
         detailPanel.add(new AuftragnehmerPanel(this)); //6
         detailPanel.add(new FinanzplanPanel(this)); //7
+        detailPanel.add(new StatusPanel(this)); //8
         
         active = detailPanel.get(0);
     }
@@ -122,10 +123,17 @@ public class DetailContainer {
                     ((MitarbeiterPanel)active).callDb();
                     changed();
                     break;
+                 
 */              case "Finanzen":
                     active = detailPanel.get(7);
                     ((FinanzplanPanel)active).setName(name);
                     ((FinanzplanPanel)active).callDb();
+                    changed();
+                    break;
+                case "Status":
+                    active = detailPanel.get(8);
+                    ((StatusPanel)active).setName(name);
+                    ((StatusPanel)active).callDb();
                     changed();
                     break;
                 case "FinanzChart":
