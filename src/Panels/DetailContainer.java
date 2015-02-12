@@ -37,7 +37,7 @@ public class DetailContainer {
         detailPanel.add(new ObjektPanel(this)); //4
         detailPanel.add(new FachamtPanel(this)); //5
         detailPanel.add(new AuftragnehmerPanel(this)); //6
-        detailPanel.add(new FinanzplanPanel()); //7
+        detailPanel.add(new FinanzplanPanel(this)); //7
         
         active = detailPanel.get(0);
     }
@@ -79,7 +79,6 @@ public class DetailContainer {
             view = s.substring(s.indexOf("##")+2, s.length());
             switch(view){
                 case "Allgemein":
-                    System.out.println(">HHHHH");
                     active = detailPanel.get(0);
                     ((DefaultPanel)active).setString(name);
                     ((DefaultPanel)active).callDb();
