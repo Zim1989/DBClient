@@ -40,7 +40,7 @@ public class StatusPanel extends javax.swing.JPanel {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
             result = st.executeQuery("select a.fertig, a.plstand, a.dfstand, a.notizen"+
-                    " ,a.idstatus from baustatus a baumassnahme b where b.name='"+name+"' and"+
+                    " ,a.idstatus from baustatus a, baumassnahme b where b.name='"+name+"' and"+
                     " b.idmassnahme=a.baumassnahme_idmassnahme");
             while(result.next()){ 
                 this.jTextField1.setText(result.getString(1));

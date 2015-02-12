@@ -78,6 +78,8 @@ public class TreePanel extends javax.swing.JPanel implements
                 top.add(projekt);
                 view = new DefaultMutableTreeNode(KonstantenKlassen.ConstantStrings.MONEY);
                 projekt.add(view);
+                 view = new DefaultMutableTreeNode("Status");
+                projekt.add(view);
             }
             st.close();
         } catch (SQLException ex) {
