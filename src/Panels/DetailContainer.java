@@ -31,13 +31,13 @@ public class DetailContainer {
         detailPanel = new ArrayList<JPanel>();
         
         detailPanel.add(new Panels.DefaultPanel(this)); //0
-        detailPanel.add(new FinanzPanel()); //1
+        detailPanel.add(new FinanzPanel(this)); //1
         detailPanel.add(new BeteiligetePanel()); //2
         detailPanel.add(new MitarbeiterPanel(this)); //3
         detailPanel.add(new ObjektPanel(this)); //4
         detailPanel.add(new FachamtPanel(this)); //5
         detailPanel.add(new AuftragnehmerPanel(this)); //6
-        detailPanel.add(new FinanzplanPanel()); //7
+        detailPanel.add(new FinanzplanPanel(this)); //7
         
         active = detailPanel.get(0);
     }
@@ -124,7 +124,9 @@ public class DetailContainer {
                     changed();
                     break;
 */                case "Finanzen":
-                    active = detailPanel.get(1);
+                    active = detailPanel.get(7);
+                    ((FinanzplanPanel)active).setName(name);
+                    ((FinanzplanPanel)active).callDb();
                     changed();
                     break;
                 default:
