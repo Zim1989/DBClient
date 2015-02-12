@@ -24,6 +24,7 @@ public class FinanzplanPanel extends javax.swing.JPanel {
     private String name;
     private ResultSet result;
     private Statement st;
+    private int id;
     
     public FinanzplanPanel(DetailContainer dc) {
         this.dc = dc;
@@ -38,8 +39,8 @@ public class FinanzplanPanel extends javax.swing.JPanel {
         try {
             st = this.dc.getOracleConnector().dbcon.createStatement();
             
-            result = st.executeQuery("select a.geplant, a.vohanden, a.ausgegeben, a.hj, a.verwnachweis" +
-                    ", d.name from finanzplan a, baustatus b, baumassnahme c, foerderprogramm d"+
+            result = st.executeQuery("select a.geplant, a.vorhanden, a.ausgegeben, a.hj, a.verwnachweis" +
+                    ", d.name, a.idfinplan from finanzplan a, baustatus b, baumassnahme c, foerderprogramm d"+
                     " where c.name = '"+name+"' and c.idmassnahme=b.baumassnahme_idmassnahme"+
                     " and a.baustatus_idstatus=b.baumassnahme_idmassnahme and "+
                     "a.foerderprogramm_idfprogramm=d.idfprogramm");
@@ -48,8 +49,9 @@ public class FinanzplanPanel extends javax.swing.JPanel {
                 this.jLabel3.setText(result.getString(2));
                 this.jTextField6.setText(result.getString(3));
                 this.jTextField2.setText(result.getString(4));
-                this.jTextField3.setText(result.getString(6));
+                this.jLabel2.setText(result.getString(6));
                 this.jTextArea1.setText(result.getString(5));
+                id = result.getInt(7);
             }
             st.close();
         } catch (SQLException ex) {
@@ -72,11 +74,12 @@ public class FinanzplanPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -104,8 +107,8 @@ public class FinanzplanPanel extends javax.swing.JPanel {
         jTextField2.setText("Haushaltsjahr");
         jPanel1.add(jTextField2);
 
-        jTextField3.setText("Förderprogramm");
-        jPanel1.add(jTextField3);
+        jLabel2.setText("Foerderprogramm");
+        jPanel1.add(jLabel2);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -123,6 +126,14 @@ public class FinanzplanPanel extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jButton2);
+
+        jButton3.setText("Graphik");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
 
         jButton1.setText("Speichern");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,21 +159,26 @@ public class FinanzplanPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             st = this.dc.getOracleConnector().dbcon.createStatement();
-            int i = st.executeUpdate("update finanzplan a, foerderprogramm b set a.geplant='"+this.jTextField1.getText()+"', "+
+            int i = st.executeUpdate("update finanzplan a set a.geplant='"+this.jTextField1.getText()+"', "+
                     "a.ausgegeben='"+this.jTextField6.getText()+"', a.hj='"+this.jTextField2.getText()+
-                    "', a.vernachweis='"+this.jTextArea1.getText()+"',"+
-                    " b.name='"+this.jTextField3.getText()+"' where a.foerderprogramm_idfprogramm=b.idfprogramm");
+                    "', a.verwnachweis='"+this.jTextArea1.getText()+"' where a.idfinplan="+id+"");
             dc.changeActive(name+KonstantenKlassen.ConstantStrings.SEPARATOR+KonstantenKlassen.ConstantStrings.SUMMARY);
         } catch (SQLException ex) {
             Logger.getLogger(MitarbeiterPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        dc.changeActive(id+KonstantenKlassen.ConstantStrings.SEPARATOR+"FinanzChart");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -170,7 +186,6 @@ public class FinanzplanPanel extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
