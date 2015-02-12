@@ -13,6 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYDotRenderer;
+import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.*;
 
@@ -27,16 +28,31 @@ public class FinanzPanel extends javax.swing.JPanel {
      */
     private DefaultPieDataset pieDataset;
     private JFreeChart chart1;
-    private ChartPanel chartPanel2;
+    private ChartPanel chartPanel1;
+    private double [][] A = {{1,2,5},{3,4,0}};
+    private DefaultXYDataset dataset;
+    private XYSplineRenderer renderer;
+    NumberAxis xax;
+    NumberAxis yax;
+    XYPlot plot;
     
     public FinanzPanel() {
         initComponents();
-        
+        dataset = new DefaultXYDataset();
+        dataset.addSeries("xy", A);
+        renderer = new XYSplineRenderer();
+        xax = new NumberAxis("x");
+        yax = new NumberAxis("y"); 
+        plot = new XYPlot(dataset,xax,yax, renderer);
+        chart1 = new JFreeChart(plot);
+        chartPanel1 = new ChartPanel(chart1);
     /*pieDataset.setValue("vorhanden", 75);
     pieDataset.setValue("ausgegeben", 25);
     chart1 = new ChartFactory.createPieChart("test", pieDataset, true, false,false);
     chartPanel2 = new ChartPanel(chart1);
-    this.add(chartPanel2, BorderLayout.NORTH);*/
+    */  this.setLayout(new java.awt.BorderLayout());
+        this.add(chartPanel1, BorderLayout.CENTER);
+        this.validate();
     }
 
     /**

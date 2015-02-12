@@ -31,8 +31,8 @@ public class ObjektPanel extends javax.swing.JPanel {
     }
 
      public void setName(String name, String projekt) {
-        this.projekt = projekt;
-        this.name = name;
+        this.projekt = name;
+        this.name = projekt;
     }
     
     public void callDb() {
