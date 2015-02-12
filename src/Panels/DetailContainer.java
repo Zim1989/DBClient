@@ -37,7 +37,7 @@ public class DetailContainer {
         detailPanel.add(new ObjektPanel(this)); //4
         detailPanel.add(new FachamtPanel(this)); //5
         detailPanel.add(new AuftragnehmerPanel(this)); //6
-        
+        detailPanel.add(new FinanzplanPanel(this)); //7
         
         active = detailPanel.get(0);
     }
@@ -90,6 +90,14 @@ public class DetailContainer {
                     name = s.substring(0, s.indexOf("$$"));
                     active = detailPanel.get(4);
                     ((ObjektPanel)active).setName(objekt, name);
+                    ((ObjektPanel)active).callDb();
+                    changed();
+                    break;
+                case "Finanzen":
+                    //String objekt = s.substring(s.indexOf("$$")+2, s.indexOf("##"));
+                    //name = s.substring(0, s.indexOf("$$"));
+                    active = detailPanel.get(7);
+                    ((ObjektPanel)active).setName(name);
                     ((ObjektPanel)active).callDb();
                     changed();
                     break;
