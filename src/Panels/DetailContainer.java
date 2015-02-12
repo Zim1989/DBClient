@@ -31,7 +31,7 @@ public class DetailContainer {
         detailPanel = new ArrayList<JPanel>();
         
         detailPanel.add(new Panels.DefaultPanel(this)); //0
-        detailPanel.add(new FinanzPanel()); //1
+        detailPanel.add(new FinanzPanel(this)); //1
         detailPanel.add(new BeteiligetePanel()); //2
         detailPanel.add(new MitarbeiterPanel(this)); //3
         detailPanel.add(new ObjektPanel(this)); //4
@@ -123,7 +123,9 @@ public class DetailContainer {
                     changed();
                     break;
 */                case "Finanzen":
-                    active = detailPanel.get(1);
+                    active = detailPanel.get(7);
+                    ((FinanzplanPanel)active).setName(name);
+                    ((FinanzplanPanel)active).callDb();
                     changed();
                     break;
                 default:
