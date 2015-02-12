@@ -76,7 +76,6 @@ public class DetailContainer {
         String view;
         try {
             name = s.substring(0, s.indexOf("##") );
-            System.out.println("---||"+name);
             view = s.substring(s.indexOf("##")+2, s.length());
             switch(view){
                 case "Allgemein":
@@ -137,6 +136,7 @@ public class DetailContainer {
                     changed();
                     break;
                 case "FinanzChart":
+                    
                     active = detailPanel.get(1);
                     ((FinanzPanel)active).setName(name);
                     ((FinanzPanel)active).callDb();
